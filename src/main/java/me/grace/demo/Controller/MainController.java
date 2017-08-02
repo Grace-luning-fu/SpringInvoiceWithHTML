@@ -8,26 +8,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MainController {
     @RequestMapping("/index")
-    public String defaultRequest() {
-        return "Welcome";
+    public String defaultRequest(Model model){
+        model.addAttribute("message");
+        return "welcome";
     }
 
     @RequestMapping("/login")
-    public @ResponseBody
-    String disLogin() {
+    public String disLogin(Model model) {
+        model.addAttribute("message");
         return "login";
     }
 
     @RequestMapping("/addproduct")
-    public @ResponseBody
-    String addProduct() {
+    public String addProduct(Model model) {
+        model.addAttribute("message");
         return "addproduct";
     }
 
     @RequestMapping("/listproduct")
-    public @ResponseBody
-    String listProduct() {
-        return "Thanks for shopping with us!";
+    public String listProduct(Model model) {
+        model.addAttribute("message");
+        return "listproduct";
     }
 
     @RequestMapping("/listindependency")
