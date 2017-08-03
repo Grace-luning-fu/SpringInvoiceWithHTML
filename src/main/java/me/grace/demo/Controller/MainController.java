@@ -1,14 +1,25 @@
 package me.grace.demo.Controller;
 
+import me.grace.demo.models.Product;
+import me.grace.demo.repositories.ProductRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class MainController {
-    @RequestMapping("/index")
+    @Autowired
+    ProductRepo productRepo;
+
+
+    @RequestMapping("/")
     public String defaultRequest(Model model){
-        model.addAttribute("message");
+        String myMessage = "welcome to the invoice App";
+        model.addAttribute("messagetest", myMessage);
         return "welcome";
     }
 
@@ -21,14 +32,20 @@ public class MainController {
 
     @GetMapping("/addproduct")
     public String addProduct(Model model) {
-        model.addAttribute("product", new Product());
+        model.addAttribute("newproduct", new Product());
         return "addproduct";
     }
 
     @PostMapping("/addproduct")
-    public String showProduct(@ModelAttribute Product product)
+    public String postProduct(@Valid @ModelAttribute("newproduct") Product product, BindingResult bindingResult)
     {
-       return "showproductdetails";
+        //System.out.println(product.getDescription());
+        //System.out.println(bindingResult.toString());
+        if(bindingResult.hasErrors()){
+            return "addproduct";
+        }
+        productRepo.save(product);
+        return "result";
     }
 
     @RequestMapping("/listproduct")
@@ -39,7 +56,7 @@ public class MainController {
 
     @RequestMapping("/listindependency")
     public String index(Model model) {
-        model.addAttribute("message", "The independencies includes: 1 web, 2 Thymeleaf, 3 test");
+        model.addAttribute("message", "The independencies include: 1 web, 2 Thymeleaf, 3 test");
         return "dependencyList";
 
     }

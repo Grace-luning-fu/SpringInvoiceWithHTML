@@ -7,11 +7,16 @@
 <body>
 <p>This is where you add your product. Add a product in the following form:</p>
 <h1>Product Form</h1>
-<form action = "#" th:action="@{/addproduct}" th:object="${product}" method="post">
-    <p>Item Code: <input type="text" th:field="*{itemCode}" /></p>
-    <p>Description: <input type="text" th:field="*{description}" /></p>
-    <p>Price: <input type="text" th:field="*{price}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+<form action = "#" th:action="@{/addproduct}" th:object="${newproduct}" method="post">
+
+    <span th:if="${#fields.hasErrors('itemCode')}" th:error="*{itemCode}">Item Code has error</span>
+    <p>Enter Item Code: <input type="text" th:field="*{itemCode}" /></p>
+
+    <span th:if="${#fields.hasErrors('description')}" th:error="*{description}">Description has error</span>
+    <p>Enter description: <input type="text" th:field="*{description}" /></p>
+
+    <p>Enter price: <input type="text" th:field="*{price}" /></p>
+    <p><input type="submit" value="Add product" /> <input type="reset" value="Reset" /></p>
 </form>
 </body>
 </html>

@@ -1,10 +1,24 @@
-package me.grace.demo.Controller;
+package me.grace.demo.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
 public class Product {
 
     private double price;
+
+    @NotNull
+    @Size(min=2, max=30)
     private String description;
-    private String itemCode;
+
+    @NotNull
+    @Min(1)
+    @Id
+    private long itemCode;
 
 
     public double getPrice() {
@@ -15,6 +29,8 @@ public class Product {
         this.price = price;
     }
 
+
+
     public String getDescription() {
         return description;
     }
@@ -23,11 +39,12 @@ public class Product {
         this.description = description;
     }
 
-    public String getItemCode() {
+
+    public long getItemCode() {
         return itemCode;
     }
 
-    public void setItemCode(String itemCode) {
+    public void setItemCode(long itemCode) {
         this.itemCode = itemCode;
     }
 }
