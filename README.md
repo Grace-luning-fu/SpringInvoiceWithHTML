@@ -1,4 +1,4 @@
-# SpringInvoiceWithHTML, Thymeleaf and mysql
+# InvoiceProject SpringBootWithHTML, Thymeleaf and mysql
 
 
 1. Build form with Thymeleaf
